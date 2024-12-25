@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plateforme de Messagerie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'>
+    <link rel="stylesheet" href="message.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+          <i class='bx bxl-c-plus-plus icon'></i>
+            <div class="logo_name">Connectetud</div>
+            <i class='bx bx-menu' id="btn" ></i>
+        </div>
+       
+        <ul class="nav-list">
+          <li>
+              <i class='bx bx-search' ></i>
+             <input type="text" placeholder="Search...">
+             <span class="tooltip">Search</span>
+          </li>
+          <li>
+           
+          <li>
+           <a href="#">
+             <i class='bx bx-user' ></i>
+             <span class="links_name">User</span>
+           </a>
+           <span class="tooltip">User</span>
+         </li>
+         <li>
+           <a href="#">
+             <i class='bx bx-chat' ></i>
+             <span class="links_name">Messages</span>
+           </a>
+           <span class="tooltip">Messages</span>
+         </li>
+         <li>
+           <a href="#">
+             <i class='bx bx-pie-chart-alt-2' ></i>
+             <span class="links_name">Analytics</span>
+           </a>
+           <span class="tooltip">Analytics</span>
+         </li>
+         <li>
+           <a href="#">
+             <i class='bx bx-folder' ></i>
+             <span class="links_name">File Manager</span>
+           </a>
+           <span class="tooltip">Files</span>
+         </li>
+         <li>
+          
+         <li>
+           <a href="#">
+             <i class='bx bx-heart' ></i>
+             <span class="links_name">Saved</span>
+           </a>
+           <span class="tooltip">Saved</span>
+         </li>
+         <li>
+           <a href="#">
+             <i class='bx bx-cog' ></i>
+             <span class="links_name">Setting</span>
+           </a>
+           <span class="tooltip">Setting</span>
+         </li>
+         <li class="profile">
+             <div class="profile-details">
+               <!--<img src="profile.jpg" alt="profileImg">-->
+               <div class="name_job">
+                 <div class="name">name of user</div>
+               <!--<img src="profile.jpg" alt="profileImg">-->
+                 <div class="job"><!-- etudiant --> </div>
+               </div>
+             </div>
+             <i class='bx bx-log-out' id="log_out" ></i>
+         </li>
+        </ul>
+      </div>
+
+
+
+    <div class="app">
+        
+        <!-- Main Content -->
+        <main class="main2">
+            <header>
+              
+                <aside class="message">
+                    <div class="title">
+                        <h3>Messaging</h3>
+                    </div>
+                    <button class="compose-btn" onclick="openComposeModal()">+ New Message</button>
+                    <nav class="menu">
+                        <ul>
+                            <li><a href="#" onclick="filterMessages('inbox')"><i class="fas fa-inbox"></i> </a></li>
+                            <li><a href="#" onclick="filterMessages('sent')"><i class="fas fa-paper-plane"></i> </a></li>
+                            <li><a href="#" onclick="filterMessages('archive')"><i class="fas fa-archive"></i> </a></li>
+                            <li><a href="#" onclick="filterMessages('trash')"><i class="fas fa-trash"></i> </a></li>
+                        </ul>
+                    </nav>
+                </aside>
+               
+            </header>
+
+            <section class="message-list" id="messageList">
+                <!-- Messages seront affichés ici -->
+                
+                
+            </section>
+        </main>
+    </div>
+    
+    <!-- Compose Modal -->
+    <div class="modal" id="composeModal">
+        <div class="modal-content">
+            <h2>New Message</h2>
+            <form id="composeForm">
+                <input type="text" id="recipient" placeholder="Destinataire">
+                <input type="text" id="subject" placeholder="Objet">
+                <textarea id="messageBody" placeholder="Votre message..."></textarea>
+                <div class="actions">
+                    <button class="button" onclick="sendMessage()">Send</button>
+                    <button class="button" onclick="closeComposeModal()">Cancel</button>
+                    <div class="banner-desc">
+                      
+                        </div>
+                </div>
+                
+                
+            </form>
+        </div>
+    </div>
+   
+    
+
+  <script src="message.js"></script>
+</body>
+</html>
+
+
