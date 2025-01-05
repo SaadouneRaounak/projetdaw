@@ -1,97 +1,60 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : dim. 05 jan. 2025 à 21:22
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
 
-CREATE TABLE `users` (
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `finaldatabase`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `applications`
+--
+
+CREATE TABLE `applications` (
   `id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `role` enum('teacher','student') NOT NULL,
-  `status` enum('active','inactive') DEFAULT 'active',
-  `phone` varchar(20) DEFAULT NULL,
-  `specialization` varchar(100) DEFAULT NULL,
-  `profile_picture` varchar(255) DEFAULT NULL,
-   `skills` text DEFAULT NULL,
-  `experience` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `status`, `phone`, `specialization`, `profile_picture`, `created_at`) VALUES
-(1, 'admin', 'admin@gmail.com', 'adminadmin', '', 'active', NULL, NULL, NULL, '2024-12-31 14:53:23'),
-(6, 'ens', 'ens1@gmail.com', '$2y$10$HA2xxGYSdY1WCfegBwgCV.q.DuOO6IwwMP6qsRcV3cpgRHmrcmNZa', 'teacher', 'active', '0561579143', '', 'uploads/manager.png', '2024-12-30 23:03:52'),
-(7, 'bourekha amani amani', 'loca@gmail.com', '$2y$10$ycMVsLPb8l.jU.lVEeYMSONNvmb/QM9Pwl008Qiqkq9LLop46DQ4C', 'student', 'active', '0561579143', 'sd', 'uploads/pexels-goumbik-669619.jpg', '2024-12-31 01:52:42'),
-(13, 'active', 'active@gmail.com', '$2y$10$g6leeRQAMI8FHrrHPkRY0.acRh2MX/L9SmJjEUDL6XI8FYVTV9jRe', 'teacher', 'active', '0561579143', 'active', '', '2024-12-31 23:31:11'),
-(15, 'diactive', 'diactive@gmail.com', '$2y$10$n3UZwKdMeJTTbsGo2Esr4ezQfli/kFXr4q0wB.S7Z.MWiWHUfpHAS', 'teacher', 'active', '0561579143', 'diactive', '', '2024-12-31 23:34:05'),
-(18, 'koukou', 'koukou@gmail.com', '$2y$10$RxRrmz1MUm23W3kXTsgr8usRMKOM1Rwsu.q0gip3YJ7HG9KGdYsKO', 'student', 'active', '0561579143', 'koukou', '', '2024-12-31 23:37:35');
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `users`
---
-
-DROP TABLE IF EXISTS `applications`;
-CREATE TABLE IF NOT EXISTS `applications` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `student_id` int NOT NULL,
-  `project_id` int NOT NULL,
-  `group_id` int DEFAULT NULL,
+  `student_id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `group_id` int(11) DEFAULT NULL,
   `application_status` enum('Pending','Accepted','Rejected') DEFAULT 'Pending',
-  `submitted_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `student_id` (`student_id`),
-  KEY `project_id` (`project_id`),
-  KEY `group_id` (`group_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `submitted_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `applications`
 --
 
 INSERT INTO `applications` (`id`, `student_id`, `project_id`, `group_id`, `application_status`, `submitted_at`) VALUES
-(1, 1, 1, NULL, 'Pending', '2024-12-30 11:31:48'),
-(2, 1, 1, NULL, 'Pending', '2024-12-30 11:31:49'),
-(3, 1, 1, NULL, 'Pending', '2024-12-30 13:57:10');
-DROP TABLE IF EXISTS `projects`;
-CREATE TABLE IF NOT EXISTS `projects` (
-  `project_id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `description` text,
-  `keywords` text,
-  `technologies` text,
-  `status` enum('open','in progress','closed') DEFAULT 'open',
-  `category_id` int NOT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`project_id`),
-  KEY `category_id` (`category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+(1, 1, 1, NULL, 'Pending', '2024-12-30 10:31:48'),
+(2, 1, 1, NULL, 'Pending', '2024-12-30 10:31:49'),
+(3, 1, 1, NULL, 'Pending', '2024-12-30 12:57:10');
 
-INSERT INTO `projects` (`project_id`, `title`, `description`, `keywords`, `technologies`, `status`, `category_id`, `created_at`) VALUES
-(1, 'Web Development Project 1', 'A web development project for learning PHP and MySQL', 'web, php, mysql', 'PHP, MySQL, HTML, CSS', 'open', 1, '2024-12-25 21:48:02'),
-(2, 'Data Science Project 1', 'A data analysis project using Python and Pandas', 'data science, python, pandas', 'Python, Pandas, scikit-learn', 'in progress', 2, '2024-12-25 21:48:02'),
-(3, 'Test Project', 'This is a test project description.', 'test, example, project', 'PHP, JavaScript, MySQL', 'open', 1, '2024-12-28 12:54:32');
+-- --------------------------------------------------------
 
---DROP TABLE IF EXISTS `category`;
-CREATE TABLE IF NOT EXISTS `category` (
-  `category_id` int NOT NULL AUTO_INCREMENT,
-  `category_name` varchar(150) NOT NULL,
-  PRIMARY KEY (`category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+--
+-- Structure de la table `category`
+--
+
+CREATE TABLE `category` (
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `category`
@@ -104,32 +67,33 @@ INSERT INTO `category` (`category_id`, `category_name`) VALUES
 (4, 'Marketing'),
 (6, 'AI');
 
-DROP TABLE IF EXISTS `group_members`;
-CREATE TABLE IF NOT EXISTS `group_members` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `group_id` int NOT NULL,
-  `student_id` int NOT NULL,
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `group_members`
+--
+
+CREATE TABLE `group_members` (
+  `id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
   `role` enum('Leader','Member') DEFAULT 'Member',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-  PRIMARY KEY (`id`),
-  KEY `group_id` (`group_id`),
-  KEY `student_id` (`student_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `group_members`
+--
 
+INSERT INTO `group_members` (`id`, `group_id`, `student_id`, `role`, `created_at`) VALUES
+(1, 1, 1, 'Member', '2025-01-03 14:00:25'),
+(2, 1, 2, 'Member', '2025-01-03 14:00:25');
 
-INSERT INTO `group_members` (`id`, `group_id`, `student_id`,'role', `created_at`) VALUES
-(1, 1, 1,'Member', '2025-01-03 15:00:25'),
-(2, 1, 2,'Member', '2025-01-03 15:00:25');
-DROP TABLE IF EXISTS `student_groups`;
-CREATE TABLE IF NOT EXISTS `student_groups` (
-  `group_id` int NOT NULL AUTO_INCREMENT,
-  `leader_id` int NOT NULL,
-  `members_count` int DEFAULT '1',
-  `max_members` int DEFAULT '3',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`group_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;  
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `notifications`
+--
 
 CREATE TABLE `notifications` (
   `id` int(11) NOT NULL,
@@ -145,3 +109,172 @@ CREATE TABLE `notifications` (
 
 INSERT INTO `notifications` (`id`, `user_id`, `message`, `created_at`, `is_read`) VALUES
 (1, 1, 'Votre candidature a été acceptée.', '2025-01-03 16:30:25', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `projects`
+--
+
+CREATE TABLE `projects` (
+  `project_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `keywords` text DEFAULT NULL,
+  `technologies` text DEFAULT NULL,
+  `status` enum('open','in progress','closed') DEFAULT 'open',
+  `category_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `projects`
+--
+
+INSERT INTO `projects` (`project_id`, `title`, `description`, `keywords`, `technologies`, `status`, `category_id`, `created_at`) VALUES
+(1, 'Web Development Project 1', 'A web development project for learning PHP and MySQL', 'web, php, mysql', 'PHP, MySQL, HTML, CSS', 'open', 1, '2024-12-25 20:48:02'),
+(2, 'Data Science Project 1', 'A data analysis project using Python and Pandas', 'data science, python, pandas', 'Python, Pandas, scikit-learn', 'in progress', 2, '2024-12-25 20:48:02'),
+(3, 'Test Project', 'This is a test project description.', 'test, example, project', 'PHP, JavaScript, MySQL', 'open', 1, '2024-12-28 11:54:32');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `student_groups`
+--
+
+CREATE TABLE `student_groups` (
+  `group_id` int(11) NOT NULL,
+  `leader_id` int(11) NOT NULL,
+  `members_count` int(11) DEFAULT 1,
+  `max_members` int(11) DEFAULT 3,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('teacher','student') NOT NULL,
+  `status` enum('active','inactive') DEFAULT 'active',
+  `phone` varchar(20) DEFAULT NULL,
+  `specialization` varchar(100) DEFAULT NULL,
+  `profile_picture` varchar(255) DEFAULT NULL,
+  `skills` text DEFAULT NULL,
+  `experience` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`, `status`, `phone`, `specialization`, `profile_picture`, `skills`, `experience`, `created_at`) VALUES
+(1, 'admin', 'admin@gmail.com', 'adminadmin', '', 'active', NULL, NULL, NULL, NULL, NULL, '2024-12-31 13:53:23'),
+(6, 'ens', 'ens1@gmail.com', '$2y$10$HA2xxGYSdY1WCfegBwgCV.q.DuOO6IwwMP6qsRcV3cpgRHmrcmNZa', 'teacher', 'active', '0561579143', '', 'uploads/manager.png', NULL, NULL, '2024-12-30 22:03:52'),
+(7, 'bourekha amani amani', 'loca@gmail.com', '$2y$10$ycMVsLPb8l.jU.lVEeYMSONNvmb/QM9Pwl008Qiqkq9LLop46DQ4C', 'student', 'active', '0561579143', 'sd', 'uploads/pexels-goumbik-669619.jpg', NULL, NULL, '2024-12-31 00:52:42'),
+(13, 'active', 'active@gmail.com', '$2y$10$g6leeRQAMI8FHrrHPkRY0.acRh2MX/L9SmJjEUDL6XI8FYVTV9jRe', 'teacher', 'active', '0561579143', 'active', '', NULL, NULL, '2024-12-31 22:31:11'),
+(15, 'diactive', 'diactive@gmail.com', '$2y$10$n3UZwKdMeJTTbsGo2Esr4ezQfli/kFXr4q0wB.S7Z.MWiWHUfpHAS', 'teacher', 'active', '0561579143', 'diactive', '', NULL, NULL, '2024-12-31 22:34:05'),
+(18, 'koukou', 'koukou@gmail.com', '$2y$10$RxRrmz1MUm23W3kXTsgr8usRMKOM1Rwsu.q0gip3YJ7HG9KGdYsKO', 'student', 'active', '0561579143', 'koukou', '', NULL, NULL, '2024-12-31 22:37:35');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `applications`
+--
+ALTER TABLE `applications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`),
+  ADD KEY `project_id` (`project_id`),
+  ADD KEY `group_id` (`group_id`);
+
+--
+-- Index pour la table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`category_id`);
+
+--
+-- Index pour la table `group_members`
+--
+ALTER TABLE `group_members`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `projects`
+--
+ALTER TABLE `projects`
+  ADD PRIMARY KEY (`project_id`),
+  ADD KEY `category_id` (`category_id`);
+
+--
+-- Index pour la table `student_groups`
+--
+ALTER TABLE `student_groups`
+  ADD PRIMARY KEY (`group_id`);
+
+--
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `applications`
+--
+ALTER TABLE `applications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `category`
+--
+ALTER TABLE `category`
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT pour la table `group_members`
+--
+ALTER TABLE `group_members`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `projects`
+--
+ALTER TABLE `projects`
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `student_groups`
+--
+ALTER TABLE `student_groups`
+  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
